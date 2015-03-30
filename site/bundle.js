@@ -73,10 +73,22 @@
 	    var fontsDom = fonts.map(function(fontName){
 	      return React.createElement("option", {value: fontName}, fontName);
 	    });
+	    var sizeInput  = React.createElement("input", {name: "size-input", type: "text"});
+	    var widthInput = React.createElement("input", {name: "width-input", type: "text"});
+	    var textInput  = React.createElement("textarea", {name: "text-input"});
+	    var calculatedWidth = '';
+	    var calculatedLines = '';
 
 	    return (
 	      React.createElement("form", null, 
-	        React.createElement("select", null, fontsDom)
+	        React.createElement("select", null, fontsDom), 
+	        sizeInput, 
+	        widthInput, 
+	        textInput, 
+	        React.createElement("div", {id: "results"}, 
+	          "WIDTH: ", calculatedWidth, 
+	          "LINES: ", calculatedLines
+	        )
 	      )
 	    );
 	  }
