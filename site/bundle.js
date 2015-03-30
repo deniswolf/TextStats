@@ -51,7 +51,7 @@
 
 	  render: function() {
 	    return (
-	      React.createElement(TextStats, null)
+	      React.createElement(TextStats, {fonts: ['a','b','z']})
 	    );
 	  }
 
@@ -67,19 +67,39 @@
 	var React = __webpack_require__(2);
 
 	var TextStats = React.createClass({displayName: "TextStats",
+
+	  getInitialState: function() {
+	    return {
+	      style: {
+	        fontFamily: '',
+	        fontSize:   '0',
+	        maxWidth:   '150px'
+	      }
+	    };
+	  },
+
 	  onChange: function(event) {
-	      console.log(event.target.value);
-	    },
+	    var style = this.state.style,
+	      name = event.target.name,
+	      value = event.target.value;
+
+	    if (name === 'font-family') style.fontFamily = value;
+	    if (name === 'size-input')  style.fontSize = value;
+	    if (name === 'width-input') style.maxWidth = value;
+
+	    this.setState({style: style});
+	  },
+
 	  render: function() {
 	    var fonts = this.props.fonts || [];
 	    var fontsList = fonts.map(function(fontName){
 	      return React.createElement("option", {value: fontName}, fontName);
 	    });
 
-	    var fontsSelector = React.createElement("select", {onChange: this.onChange}, fontsList)
+	    var fontsSelector = React.createElement("select", {name: "font-family", onChange: this.onChange}, fontsList)
 	    var sizeInput  = React.createElement("input", {name: "size-input", type: "text", onChange: this.onChange});
 	    var widthInput = React.createElement("input", {name: "width-input", type: "text", onChange: this.onChange});
-	    var textInput  = React.createElement("textarea", {name: "text-input", onChange: this.onChange});
+	    var textInput  = React.createElement("textarea", {style: this.state.style, name: "text-input", onChange: this.onChange});
 
 	    var calculatedWidth = '';
 	    var calculatedLines = '';
