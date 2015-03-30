@@ -7,8 +7,10 @@ var TextStats = React.createClass({
       style: {
         fontFamily: '',
         fontSize:   '0',
-        maxWidth:   '150px'
-      }
+        maxWidth:   '150px',
+        wordWrap:   'break-word'
+      },
+      text: ''
     };
   },
 
@@ -20,6 +22,7 @@ var TextStats = React.createClass({
     if (name === 'font-family') style.fontFamily = value;
     if (name === 'size-input')  style.fontSize = value;
     if (name === 'width-input') style.maxWidth = value;
+    if (name === 'text-input') this.setState({text: value});
 
     this.setState({style: style});
   },
@@ -31,9 +34,10 @@ var TextStats = React.createClass({
     });
 
     var fontsSelector = <select name='font-family' onChange={this.onChange}>{fontsList}</select>
-    var sizeInput  = <input name="size-input" type="text" onChange={this.onChange} />;
-    var widthInput = <input name="width-input" type="text" onChange={this.onChange} />;
-    var textInput  = <textarea style={this.state.style} name="text-input" onChange={this.onChange} />;
+    var sizeInput     = <input name="size-input" type="text" onChange={this.onChange} />;
+    var widthInput    = <input name="width-input" type="text" onChange={this.onChange} />;
+    var textInput     = <textarea name="text-input" onChange={this.onChange} />;
+    var textDisplay   = <div style={this.state.style}>{this.state.text}</div>;
 
     var calculatedWidth = '';
     var calculatedLines = '';
@@ -48,6 +52,8 @@ var TextStats = React.createClass({
           WIDTH: {calculatedWidth}
           LINES: {calculatedLines}
         </div>
+        {textDisplay}
+
       </form>
     );
   }
