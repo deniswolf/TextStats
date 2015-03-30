@@ -1,0 +1,32 @@
+{
+  "author": "Denis Wolf",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "devDependencies": {
+    "jest-cli": "^0.4.0",
+    "jsx-loader": "*",
+    "react-tools": "^0.13.1",
+    "webpack": "*"
+  },
+  "scripts": {
+    "start": "npm run webpack & npm run serve",
+    "webpack": "webpack -w",
+    "serve": "cd site && python -m SimpleHTTPServer",
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ],
+    "testFileExtensions": [
+      "js",
+      "jsx"
+    ]
+  }
+}
