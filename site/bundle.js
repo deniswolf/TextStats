@@ -69,9 +69,14 @@
 	var TextStats = React.createClass({displayName: "TextStats",
 
 	  render: function() {
+	    var fonts = this.props.fonts || [];
+	    var fontsDom = fonts.map(function(fontName){
+	      return React.createElement("option", {value: fontName}, fontName);
+	    });
 
 	    return (
-	      React.createElement("form", null
+	      React.createElement("form", null, 
+	        React.createElement("select", null, fontsDom)
 	      )
 	    );
 	  }
