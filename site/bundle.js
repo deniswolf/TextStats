@@ -73,9 +73,9 @@
 	      style: {
 	        fontFamily: '',
 	        fontSize:   '0',
-	        maxWidth:   '150px',
-	        wordWrap:   'break-word'
+	        maxWidth:   '0px'
 	      },
+	      width: '0px',
 	      text: ''
 	    };
 	  },
@@ -90,7 +90,12 @@
 	    if (name === 'width-input') style.maxWidth = value;
 	    if (name === 'text-input') this.setState({text: value});
 
-	    this.setState({style: style});
+	    this.setState({style: style}, function(){
+	      var textDisplay = React.findDOMNode(this.refs.textDisplay);
+	      this.setState({width: textDisplay.offsetWidth + 'px'});
+	    });
+
+
 	  },
 
 	  render: function() {
@@ -103,9 +108,9 @@
 	    var sizeInput     = React.createElement("input", {name: "size-input", type: "text", onChange: this.onChange});
 	    var widthInput    = React.createElement("input", {name: "width-input", type: "text", onChange: this.onChange});
 	    var textInput     = React.createElement("textarea", {name: "text-input", onChange: this.onChange});
-	    var textDisplay   = React.createElement("div", {style: this.state.style}, this.state.text);
+	    var textDisplay   = React.createElement("div", {style: this.state.style}, React.createElement("span", {ref: "textDisplay"}, this.state.text));
 
-	    var calculatedWidth = '';
+	    var calculatedWidth = this.state.width;
 	    var calculatedLines = '';
 
 	    return (
