@@ -67,21 +67,26 @@
 	var React = __webpack_require__(2);
 
 	var TextStats = React.createClass({displayName: "TextStats",
-
+	  onChange: function(event) {
+	      console.log(event.target.value);
+	    },
 	  render: function() {
 	    var fonts = this.props.fonts || [];
-	    var fontsDom = fonts.map(function(fontName){
+	    var fontsList = fonts.map(function(fontName){
 	      return React.createElement("option", {value: fontName}, fontName);
 	    });
-	    var sizeInput  = React.createElement("input", {name: "size-input", type: "text"});
-	    var widthInput = React.createElement("input", {name: "width-input", type: "text"});
-	    var textInput  = React.createElement("textarea", {name: "text-input"});
+
+	    var fontsSelector = React.createElement("select", {onChange: this.onChange}, fontsList)
+	    var sizeInput  = React.createElement("input", {name: "size-input", type: "text", onChange: this.onChange});
+	    var widthInput = React.createElement("input", {name: "width-input", type: "text", onChange: this.onChange});
+	    var textInput  = React.createElement("textarea", {name: "text-input", onChange: this.onChange});
+
 	    var calculatedWidth = '';
 	    var calculatedLines = '';
 
 	    return (
 	      React.createElement("form", null, 
-	        React.createElement("select", null, fontsDom), 
+	        fontsSelector, 
 	        sizeInput, 
 	        widthInput, 
 	        textInput, 

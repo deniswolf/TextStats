@@ -1,21 +1,26 @@
 var React = require('react');
 
 var TextStats = React.createClass({
-
+  onChange: function(event) {
+      console.log(event.target.value);
+    },
   render: function() {
     var fonts = this.props.fonts || [];
-    var fontsDom = fonts.map(function(fontName){
+    var fontsList = fonts.map(function(fontName){
       return <option value={fontName}>{fontName}</option>;
     });
-    var sizeInput  = <input name="size-input" type="text"/>;
-    var widthInput = <input name="width-input" type="text"/>;
-    var textInput  = <textarea name="text-input"/>;
+
+    var fontsSelector = <select onChange={this.onChange}>{fontsList}</select>
+    var sizeInput  = <input name="size-input" type="text" onChange={this.onChange} />;
+    var widthInput = <input name="width-input" type="text" onChange={this.onChange} />;
+    var textInput  = <textarea name="text-input" onChange={this.onChange} />;
+
     var calculatedWidth = '';
     var calculatedLines = '';
 
     return (
       <form>
-        <select>{fontsDom}</select>
+        {fontsSelector}
         {sizeInput}
         {widthInput}
         {textInput}
