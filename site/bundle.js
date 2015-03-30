@@ -76,6 +76,7 @@
 	        maxWidth:   '0px'
 	      },
 	      width: '0px',
+	      lines: 1,
 	      text: ''
 	    };
 	  },
@@ -91,8 +92,10 @@
 	    if (name === 'text-input') this.setState({text: value});
 
 	    this.setState({style: style}, function(){
-	      var textDisplay = React.findDOMNode(this.refs.textDisplay);
-	      this.setState({width: textDisplay.offsetWidth + 'px'});
+	      var textDisplay = React.findDOMNode(this.refs.textDisplay),
+	          width = textDisplay.offsetWidth + 'px',
+	          lines = textDisplay.getClientRects().length;
+	      this.setState({width: width, lines: lines});
 	    });
 
 
@@ -111,7 +114,7 @@
 	    var textDisplay   = React.createElement("div", {style: this.state.style}, React.createElement("span", {ref: "textDisplay"}, this.state.text));
 
 	    var calculatedWidth = this.state.width;
-	    var calculatedLines = '';
+	    var calculatedLines = this.state.lines;
 
 	    return (
 	      React.createElement("form", null, 
@@ -124,7 +127,6 @@
 	          "LINES: ", calculatedLines
 	        ), 
 	        textDisplay
-
 	      )
 	    );
 	  }

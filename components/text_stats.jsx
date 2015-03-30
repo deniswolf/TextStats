@@ -10,6 +10,7 @@ var TextStats = React.createClass({
         maxWidth:   '0px'
       },
       width: '0px',
+      lines: 1,
       text: ''
     };
   },
@@ -25,8 +26,10 @@ var TextStats = React.createClass({
     if (name === 'text-input') this.setState({text: value});
 
     this.setState({style: style}, function(){
-      var textDisplay = React.findDOMNode(this.refs.textDisplay);
-      this.setState({width: textDisplay.offsetWidth + 'px'});
+      var textDisplay = React.findDOMNode(this.refs.textDisplay),
+          width = textDisplay.offsetWidth + 'px',
+          lines = textDisplay.getClientRects().length;
+      this.setState({width: width, lines: lines});
     });
 
 
@@ -39,13 +42,13 @@ var TextStats = React.createClass({
     });
 
     var fontsSelector = <select name='font-family' onChange={this.onChange}>{fontsList}</select>
-    var sizeInput     = <input name="size-input" type="text" onChange={this.onChange} />;
-    var widthInput    = <input name="width-input" type="text" onChange={this.onChange} />;
+    var sizeInput     = <input name="size-input"   type="text" onChange={this.onChange} />;
+    var widthInput    = <input name="width-input"  type="text" onChange={this.onChange} />;
     var textInput     = <textarea name="text-input" onChange={this.onChange} />;
     var textDisplay   = <div style={this.state.style}><span ref="textDisplay">{this.state.text}</span></div>;
 
     var calculatedWidth = this.state.width;
-    var calculatedLines = '';
+    var calculatedLines = this.state.lines;
 
     return (
       <form>
@@ -58,7 +61,6 @@ var TextStats = React.createClass({
           LINES: {calculatedLines}
         </div>
         {textDisplay}
-
       </form>
     );
   }
