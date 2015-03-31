@@ -8,11 +8,11 @@ React.js component that checks the width and number of lines of given text, allo
 * python to run local web-server, should be included by default in most Mac/Linux systems
 
 ## Installation
-`npm install -g webpack`
+In the directory of project:
 
-for tests: `npm install -g webpack jest`
+`npm install -g webpack jest && npm install`
 
 ## Usage
 
 * `npm start`
-* open (http://localhost:8000)[http://localhost:8000]
+* open [http://localhost:8000](http://localhost:8000)
