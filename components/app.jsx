@@ -5,7 +5,7 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <TextStats fonts={['monospace', 'sans-serif', 'serif', 'Cantarell', 'Droid Serif']}/>
+      <TextStats fonts={['monospace', 'sans-serif', 'serif', 'Tangerine', 'Droid Serif']}/>
     );
   }
 

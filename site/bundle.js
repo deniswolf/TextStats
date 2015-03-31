@@ -51,7 +51,7 @@
 
 	  render: function() {
 	    return (
-	      React.createElement(TextStats, {fonts: ['monospace', 'sans-serif', 'serif', 'Cantarell', 'Droid Serif']})
+	      React.createElement(TextStats, {fonts: ['monospace', 'sans-serif', 'serif', 'Tangerine', 'Droid Serif']})
 	    );
 	  }
 
